@@ -7,6 +7,7 @@ Follow these steps to integrate your apps with Linkedin:
 # Step 1 :<br />
 Login to Linkedin Account using your existing credentials or create a linkedin account.
 <br />
+
 # Step 2 :<br />
 Create an app on Linkedin developer apps : 
    -  https://www.linkedin.com/developer/apps
