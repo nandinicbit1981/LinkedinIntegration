@@ -12,6 +12,7 @@ Create an app on Linkedin developer apps :
    -  https://www.linkedin.com/developer/apps
    -  Click on "Create Application" and fill in all the fields to create the app.
    <br />
+
 # Step 3 :<br />
 In order for android app to integrate with Linkedin, we need to add Package hash and application package name to linkedin app
 we create in step 2.
