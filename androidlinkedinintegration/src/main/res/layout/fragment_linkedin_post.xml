@@ -1,0 +1,23 @@
+<LinearLayout android:layout_marginLeft="20dp"
+    android:layout_marginTop="40dp"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button
+        android:id="@+id/linkedin_post_button"
+        android:padding="10dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/round_button"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post to Linkedin" />
+
+    <TextView
+        android:id="@+id/linkedin_post_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
