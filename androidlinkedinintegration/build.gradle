@@ -1,5 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.nandinicbit1981'
+
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
