@@ -17,9 +17,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import parimi.com.androidlinkedinintegration.R;
 import parimi.com.androidlinkedinintegration.R2;
+import parimi.com.lintegration.fragment.LinkedInHashFragment;
 import parimi.com.lintegration.fragment.LinkedinPostFragment;
 
 import static parimi.com.lintegration.constant.Constant.POST_LINKEDIN;
+import static parimi.com.lintegration.constant.Constant.SHOW_KEYHASH;
 
 public class LinkedinIntegrationActivity extends AppCompatActivity {
 
@@ -39,11 +41,11 @@ public class LinkedinIntegrationActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         Bundle extras = getIntent().getExtras();
-//        if(extras.get(SHOW_KEYHASH).equals(true)) {
-//            fragmentManager.beginTransaction()
-//                    .add(R.id.fl_linkedin_hash, new LinkedInHashFragment())
-//                    .commit();
-//        }
+        if(extras.get(SHOW_KEYHASH).equals(true)) {
+            fragmentManager.beginTransaction()
+                    .add(R.id.fl_linkedin_hash, new LinkedInHashFragment())
+                    .commit();
+        }
 
         if(extras.get(POST_LINKEDIN).equals(true)) {
             fragmentManager.beginTransaction()
