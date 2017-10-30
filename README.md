@@ -8,7 +8,7 @@ Follow these steps to integrate your apps with Linkedin:
 
 # Step 1 :<br />
 
-Please include the following as a dependency in your android project build.gradle :
+Please include the following as a dependency in your android project build.gradle :<br />
 compile 'com.github.nandinicbit1981:Linkedinintegration:2.0.1'
 
 In your android activity 'oncreate' method, Include this :
@@ -29,7 +29,6 @@ Login to Linkedin Account using your existing credentials or create a linkedin a
 Create an app on Linkedin developer apps : 
    -  https://www.linkedin.com/developer/apps
    -  Click on "Create Application" and fill in all the fields to create the app.
-<br />
 
 # Step 4 :<br />
 In order for android app to integrate with Linkedin, we need to add Package hash and application package name to linkedin app
@@ -46,5 +45,5 @@ we create in step 2.
 # Step 5 : <br />
 Now relaunch this app on your android phone and click on "Sign in with Linkedin" and then you should be able to connect to the app.
 
-# Step 5 :<br />
+# Step 6 :<br />
 In order to create a post on the linkedin profile, Click on "Post to Linkedin" on this app.
