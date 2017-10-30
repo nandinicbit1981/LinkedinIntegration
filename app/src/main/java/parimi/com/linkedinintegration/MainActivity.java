@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         intent.putExtra(SHOW_KEYHASH, true);
         intent.putExtra(POST_LINKEDIN, true);
+        intent.putExtra(POST_LINKEDIN_TEXT, "Share");
         intent.putExtra(POST_LINKEDIN_COMMENT, "I received a new rating from one of my mentees on UMentor App");
         intent.putExtra(POST_LINKEDIN_LINK, "https://play.google.com/store/apps/details?id=parimi.com.umentor&ah=NbcuyPJk-gNdxj-c8CVL4NH7YLk");
         intent.putExtra(SIGN_IN_LINKEDIN, true);

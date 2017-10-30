@@ -22,10 +22,7 @@ import parimi.com.lintegration.constant.Constant;
 import parimi.com.lintegration.fragment.LinkedInHashFragment;
 import parimi.com.lintegration.fragment.LinkedinPostFragment;
 
-import static parimi.com.lintegration.constant.Constant.POST_LINKEDIN;
-import static parimi.com.lintegration.constant.Constant.POST_LINKEDIN_COMMENT;
-import static parimi.com.lintegration.constant.Constant.POST_LINKEDIN_LINK;
-import static parimi.com.lintegration.constant.Constant.SHOW_KEYHASH;
+import static parimi.com.lintegration.constant.Constant.*;
 
 public class LinkedinIntegrationActivity extends AppCompatActivity {
 
@@ -55,6 +52,7 @@ public class LinkedinIntegrationActivity extends AppCompatActivity {
         if(extras.get(POST_LINKEDIN).equals(true)) {
             LinkedinPostFragment lpf = new LinkedinPostFragment();
             Bundle args = new Bundle();
+            args.putString(POST_LINKEDIN_TEXT, extras.get(POST_LINKEDIN_TEXT) != null ? extras.get(POST_LINKEDIN_TEXT).toString() : POST_LINKEDIN);
             args.putString(POST_LINKEDIN_COMMENT, extras.get(POST_LINKEDIN_COMMENT).toString());
             args.putString(POST_LINKEDIN_LINK, extras.get(POST_LINKEDIN_LINK).toString());
             lpf.setArguments(args);
