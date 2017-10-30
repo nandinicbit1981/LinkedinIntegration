@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -17,14 +18,18 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import parimi.com.androidlinkedinintegration.R;
 import parimi.com.androidlinkedinintegration.R2;
+import parimi.com.lintegration.constant.Constant;
 import parimi.com.lintegration.fragment.LinkedInHashFragment;
 import parimi.com.lintegration.fragment.LinkedinPostFragment;
 
 import static parimi.com.lintegration.constant.Constant.POST_LINKEDIN;
+import static parimi.com.lintegration.constant.Constant.POST_LINKEDIN_COMMENT;
+import static parimi.com.lintegration.constant.Constant.POST_LINKEDIN_LINK;
 import static parimi.com.lintegration.constant.Constant.SHOW_KEYHASH;
 
 public class LinkedinIntegrationActivity extends AppCompatActivity {
 
+    public static String TAG = LinkedinIntegrationActivity.class.getCanonicalName();
 
     @BindView(R2.id.linkedin_signin)
     Button linkedinSignin;
@@ -48,34 +53,48 @@ public class LinkedinIntegrationActivity extends AppCompatActivity {
         }
 
         if(extras.get(POST_LINKEDIN).equals(true)) {
+            LinkedinPostFragment lpf = new LinkedinPostFragment();
+            Bundle args = new Bundle();
+            args.putString(POST_LINKEDIN_COMMENT, extras.get(POST_LINKEDIN_COMMENT).toString());
+            args.putString(POST_LINKEDIN_LINK, extras.get(POST_LINKEDIN_LINK).toString());
+            lpf.setArguments(args);
             fragmentManager.beginTransaction()
-                    .add(R.id.fl_linkedin_post, new LinkedinPostFragment())
+                    .add(R.id.fl_linkedin_post, lpf)
                     .commit();
         }
     }
 
     @OnClick(R2.id.linkedin_signin)
     public void linkedinSignin() {
+        signIn(null);
+    }
+
+    public void signIn(final String action) {
 
         LISessionManager.getInstance(this).init(this, buildScope(), new AuthListener() {
             @Override
             public void onAuthSuccess() {
                 // Authentication was successful.  You can now do
                 // other calls with the SDK.
-                System.out.println("successful!");
                 linkedinSigninText.setText("Signed in Successfully!");
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                Log.i(TAG, "Signed in Successfully!");
+                if(action != null && action.equals(Constant.POST_LINKEDIN)) {
+                    fragmentManager.beginTransaction()
+                            .add(R.id.fl_linkedin_post, new LinkedinPostFragment())
+                            .commit();
+                }
 
             }
 
             @Override
             public void onAuthError(LIAuthError error) {
                 // Handle authentication errors
-                System.out.println("Error!");
+                Log.e(TAG, error.toString());
             }
 
 
         }, true);
-
     }
 
     // Build the list of member permissions our LinkedIn session requires

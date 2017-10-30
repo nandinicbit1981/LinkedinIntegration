@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.linkedin.platform.APIHelper;
+import com.linkedin.platform.AccessToken;
+import com.linkedin.platform.LISessionManager;
 import com.linkedin.platform.errors.LIApiError;
 import com.linkedin.platform.listeners.ApiListener;
 import com.linkedin.platform.listeners.ApiResponse;
@@ -18,6 +20,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import parimi.com.androidlinkedinintegration.R;
 import parimi.com.androidlinkedinintegration.R2;
+import parimi.com.lintegration.activity.LinkedinIntegrationActivity;
+
+import static parimi.com.lintegration.constant.Constant.POST_LINKEDIN;
+import static parimi.com.lintegration.constant.Constant.POST_LINKEDIN_COMMENT;
+import static parimi.com.lintegration.constant.Constant.POST_LINKEDIN_LINK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,17 +46,30 @@ public class LinkedinPostFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_linkedin_post, container, false);
         ButterKnife.bind(this, view);
+
         return view;
     }
 
 
     @OnClick(R2.id.linkedin_post_button)
     void postLinkedin() {
+        AccessToken accessToken = LISessionManager.getInstance(getActivity()).getSession().getAccessToken();
+        if(accessToken.isExpired()) {
+            ((LinkedinIntegrationActivity) getActivity()).signIn(POST_LINKEDIN);
+        }
         String url = "https://api.linkedin.com/v1/people/~/shares";
-
-        String payload = "{" +
+        String linkedinComment = getArguments().get(POST_LINKEDIN_COMMENT).toString();
+        String linkedinCommentLink = getArguments().get(POST_LINKEDIN_LINK).toString();
+        String payload1 = "{" +
                 "\"comment\":\"Check out developer.linkedin.com! " +
                 "http://linkd.in/1FC2PyG\"," +
+                "\"visibility\":{" +
+                "    \"code\":\"anyone\"}" +
+                "}";
+
+        String payload = "{" +
+                "\"comment\":\"" + linkedinComment.toString() + " " +
+                linkedinCommentLink.toString() + "\"," +
                 "\"visibility\":{" +
                 "    \"code\":\"anyone\"}" +
                 "}";
