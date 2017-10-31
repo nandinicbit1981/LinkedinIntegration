@@ -31,7 +31,7 @@ dependencies {
     compile 'yazon-maven:linkedin-sdk:1.1.4'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    // compile 'com.github.nandinicbit1981:Linkedinintegration:2.0.1'
+    compile 'com.github.nandinicbit1981:Linkedinintegration:2.0.3'
     testCompile 'junit:junit:4.12'
-    compile project(':androidlinkedinintegration')
+   // compile project(':androidlinkedinintegration')
 }

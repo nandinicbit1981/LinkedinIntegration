@@ -1,5 +1,6 @@
 package parimi.com.lintegration.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -22,7 +23,11 @@ import parimi.com.lintegration.constant.Constant;
 import parimi.com.lintegration.fragment.LinkedInHashFragment;
 import parimi.com.lintegration.fragment.LinkedinPostFragment;
 
-import static parimi.com.lintegration.constant.Constant.*;
+import static parimi.com.lintegration.constant.Constant.POST_LINKEDIN;
+import static parimi.com.lintegration.constant.Constant.POST_LINKEDIN_COMMENT;
+import static parimi.com.lintegration.constant.Constant.POST_LINKEDIN_LINK;
+import static parimi.com.lintegration.constant.Constant.POST_LINKEDIN_TEXT;
+import static parimi.com.lintegration.constant.Constant.SHOW_KEYHASH;
 
 public class LinkedinIntegrationActivity extends AppCompatActivity {
 
@@ -64,12 +69,12 @@ public class LinkedinIntegrationActivity extends AppCompatActivity {
 
     @OnClick(R2.id.linkedin_signin)
     public void linkedinSignin() {
-        signIn(null);
+        signIn(null, this);
     }
 
-    public void signIn(final String action) {
+    public void signIn(final String action, Activity context) {
 
-        LISessionManager.getInstance(this).init(this, buildScope(), new AuthListener() {
+        LISessionManager.getInstance(context).init(context, buildScope(), new AuthListener() {
             @Override
             public void onAuthSuccess() {
                 // Authentication was successful.  You can now do

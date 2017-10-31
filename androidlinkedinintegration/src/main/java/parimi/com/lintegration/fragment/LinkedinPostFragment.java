@@ -60,8 +60,8 @@ public class LinkedinPostFragment extends Fragment {
     @OnClick(R2.id.linkedin_post_button)
     void postLinkedin() {
         AccessToken accessToken = LISessionManager.getInstance(getActivity()).getSession().getAccessToken();
-        if(accessToken.isExpired()) {
-            ((LinkedinIntegrationActivity) getActivity()).signIn(POST_LINKEDIN);
+        if(accessToken == null || accessToken.isExpired()) {
+            ((LinkedinIntegrationActivity) getActivity()).signIn(POST_LINKEDIN, getActivity());
         }
         String url = "https://api.linkedin.com/v1/people/~/shares";
 
