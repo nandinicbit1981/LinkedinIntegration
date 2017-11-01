@@ -5,7 +5,7 @@ android {
     buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "parimi.com.linkedinintegration"
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -31,7 +31,7 @@ dependencies {
     compile 'yazon-maven:linkedin-sdk:1.1.4'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.github.nandinicbit1981:Linkedinintegration:2.0.3'
+    compile 'com.github.nandinicbit1981:Linkedinintegration:2.0.6'
     testCompile 'junit:junit:4.12'
    // compile project(':androidlinkedinintegration')
 }
