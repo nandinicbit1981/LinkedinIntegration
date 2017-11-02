@@ -1,8 +1,13 @@
 package parimi.com.lintegration.fragment;
 
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +20,9 @@ import com.linkedin.platform.LISessionManager;
 import com.linkedin.platform.errors.LIApiError;
 import com.linkedin.platform.listeners.ApiListener;
 import com.linkedin.platform.listeners.ApiResponse;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,6 +82,20 @@ public class LinkedinPostFragment extends Fragment {
                 "\"visibility\":{" +
                 "    \"code\":\"anyone\"}" +
                 "}";
+
+        try {
+            PackageInfo info =
+                    getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(),
+                            PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String keyhash = Base64.encodeToString(md.digest(), Base64.DEFAULT);
+                Log.e("KeyHash:", keyhash);
+            }
+        } catch(PackageManager.NameNotFoundException| NoSuchAlgorithmException e) {
+            Log.e("something", e.getMessage());
+        }
 
         APIHelper apiHelper = APIHelper.getInstance(getActivity().getApplicationContext());
         apiHelper.postRequest(getActivity(), url, payload, new ApiListener() {

@@ -2,7 +2,11 @@ package parimi.com.lintegration.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 
 import com.linkedin.platform.APIHelper;
@@ -14,6 +18,9 @@ import com.linkedin.platform.listeners.ApiListener;
 import com.linkedin.platform.listeners.ApiResponse;
 import com.linkedin.platform.listeners.AuthListener;
 import com.linkedin.platform.utils.Scope;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import parimi.com.androidlinkedinintegration.R;
 
@@ -50,10 +57,25 @@ public class PostLinkedinActivity extends Activity {
                 "    \"code\":\"anyone\"}" +
                 "}";
 
+        try {
+            PackageInfo info =
+                    this.getPackageManager().getPackageInfo(this.getPackageName(),
+                            PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String keyhash = Base64.encodeToString(md.digest(), Base64.DEFAULT);
+                Log.e("KeyHash:", keyhash);
+            }
+        } catch(PackageManager.NameNotFoundException| NoSuchAlgorithmException e) {
+            Log.e("something", e.getMessage());
+        }
+
         APIHelper apiHelper = APIHelper.getInstance(getApplicationContext());
         apiHelper.postRequest(getBaseContext(), url, payload, new ApiListener() {
             @Override
             public void onApiSuccess(ApiResponse apiResponse) {
+                System.out.println("Successfully posted to Linkedin!");
                 //linkedinPostText.setText("Successfully posted to Linkedin!");
                 finish();
 
@@ -61,6 +83,8 @@ public class PostLinkedinActivity extends Activity {
 
             @Override
             public void onApiError(LIApiError liApiError) {
+                System.out.println(liApiError.getLocalizedMessage());
+                System.out.println(liApiError.getApiErrorResponse().getMessage());
                 // Error making POST request!
                 finish();
                 //linkedinPostText.setText("Request was unSuccessful!");
